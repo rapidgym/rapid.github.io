@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rapid Fitness Gym</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+    }
+    body {
+      background-color: #0e0e0e;
+      color: #fff;
+    }
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      background-color: #000;
+      border-bottom: 2px solid #fff;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .menu-icon {
+      width: 25px;
+      height: 3px;
+      background-color: #fff;
+      position: relative;
+      cursor: pointer;
+    }
+    .menu-icon::before,
+    .menu-icon::after {
+      content: "";
+      width: 25px;
+      height: 3px;
+      background-color: #fff;
+      position: absolute;
+      left: 0;
+    }
+    .menu-icon::before {
+      top: -8px;
+    }
+    .menu-icon::after {
+      top: 8px;
+    }
+
+    header {
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+        url('https://images.unsplash.com/photo-1571019613914-85f342c91b9c?fit=crop&w=1400&q=80') center/cover no-repeat;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      animation: fadeIn 2s ease-in-out;
+    }
+    header h1 {
+      font-size: 4rem;
+      color: #f00;
+      text-shadow: 2px 2px #000;
+    }
+    header p {
+      font-size: 1.6rem;
+      margin-top: 1rem;
+      max-width: 600px;
+    }
+    .cta {
+      margin-top: 30px;
+      padding: 12px 24px;
+      background-color: #f00;
+      color: #fff;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .cta:hover {
+      background-color: #ffcc00;
+      color: #000;
+    }
+    section {
+      padding: 60px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #f00;
+      font-size: 2.5rem;
+    }
+    .card {
+      background: #1a1a1a;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+    }
+    .card h3 {
+      color: #f00;
+      margin-bottom: 10px;
+    }
+    .card p {
+      line-height: 1.5;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .grid {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+
+    .comment-section {
+      background: #1a1a1a;
+      padding: 30px 20px;
+      margin-top: 40px;
+      border-radius: 12px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .comment-section h3 {
+      color: #f00;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    .comment-form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .comment-form textarea {
+      width: 100%;
+      min-height: 120px;
+      padding: 10px;
+      border-radius: 8px;
+      resize: vertical;
+      font-size: 1rem;
+      background: #0e0e0e;
+      color: #fff;
+      border: 1px solid #555;
+    }
+
+    .comment-form button {
+      align-self: flex-end;
+      padding: 10px 20px;
+      background-color: #f00;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .comment-form button:hover {
+      background-color: #ffcc00;
+      color: #000;
+    }
+
+    /* Sidebar Styles */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      right: -250px;
+      width: 250px;
+      height: 100%;
+      background-color: #1a1a1a;
+      color: white;
+      padding-top: 60px;
+      transition: 0.3s ease;
+      z-index: 1000;
+      box-shadow: -2px 0 10px rgba(0,0,0,0.5);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar a {
+      padding: 15px 25px;
+      text-decoration: none;
+      color: #fff;
+      font-weight: bold;
+      border-bottom: 1px solid #333;
+    }
+
+    .sidebar a:hover {
+      background-color: #f00;
+      color: #fff;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: rgba(0,0,0,0.6);
+      z-index: 999;
+      display: none;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #000;
+      color: #fff;
+      margin-top: 60px;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2.5rem;
+      }
+      header p {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    <div class="logo">Rapid Fitness GYM</div>
+    <div class="menu-icon"></div>
+  </div>
+
+  <!-- Sidebar Menu -->
+  <div id="sidebar" class="sidebar">
+    <a href="#">Home</a>
+    <a href="membership.html">Membership</a>
+    <a href="#">Buy Supplement</a>
+    <a href="faculty.html">Gym Faculty and Services</a>
+    <a href="#">About</a>
+  </div>
+  <div id="overlay" class="overlay" onclick="closeSidebar()"></div>
+
+  <header>
+    <h1>Rapid Fitness Gym</h1>
+    <p>Transform Your Body. Transform Your Life. Join the ultimate gym experience in Rewari, Haryana.</p>
+    <a href="membership.html" class="cta">Join Now</a>
+  </header>
+
+  <section>
+    <h2>About Us</h2>
+    <div class="card">
+      <h3>Owner: Ajay Yadav</h3>
+      <p>Located at Kund, Near Police Station, Rewari, Haryana — Rapid Fitness Gym is a state-of-the-art fitness center designed to help you crush your fitness goals.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Membership Plans</h2>
+    <a href="membership.html" style="text-decoration: none; color: inherit;">
+    <div class="grid">
+      <div class="card">
+        <img src="https://i.ibb.co/wrb1fZ8F/vidiq-thumbnail-1.jpg" alt="Monthly Plan">
+        <h3>Monthly Plan</h3>
+        <p>Rs. 1,200/month - Includes gym access and group workouts.</p>
+      </div>
+      <a href="membership.html" style="text-decoration: none; color: inherit;">
+      <div class="card">
+        <img src="https://i.ibb.co/SwyM0H2n/vidiq-thumbnail-2.jpg" alt="Quarterly Plan">
+        <h3>Quarterly Plan</h3>
+        <p>Rs. 3,000/3 months - Extra 1 diet plan included.</p>
+      </div>
+      <a href="membership.html" style="text-decoration: none; color: inherit;">
+  <div class="card">
+    <img src="https://i.ibb.co/B23kBrHY/Jxi.jpg" alt="Yearly Plan">
+    <h3>Yearly Plan</h3>
+    <p>Rs. 10,000/year - Personal trainer + free protein (starter).</p>
+  </div>
+</a>
+    </div>
+  </section>
+
+  <section>
+  <h2>Facilities</h2>
+  <div class="grid">
+    <a href="faculty.html" style="text-decoration: none; color: inherit;">
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1554284126-aa88f22d8b74?fit=crop&w=800&q=80" alt="Equipment">
+        <h3>Modern Equipment</h3>
+        <p>Top-quality strength and cardio machines available.</p>
+      </div>
+    </a>
+  </div>
+</section>
+      <div class="card">
+        <img src="https://i.ibb.co/k64QHD4R/gym-trainer-motivating-client-professional-to-lift-dumbbell-47295799.jpg" alt="Trainers">
+        <h3>Expert Trainers</h3>
+        <p>Certified personal trainers to guide you daily.</p>
+      </div>
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1605296867304-46d5465a13f1?fit=crop&w=800&q=80" alt="Supplements">
+        <h3>Supplement Store</h3>
+        <p>Buy original protein, creatine, vitamins & more.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Gallery</h2>
+    <div class="grid">
+      <div class="card"><img src="https://i.ibb.co/GfcjZL9m/vidiq-thumbnail-1-1.jpg" alt="Gym View"></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Testimonials</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Rohan</h3>
+        <p>"Best gym in Rewari! Equipment and trainers are top-notch."</p>
+      </div>
+      <div class="card">
+        <h3>Neha</h3>
+        <p>"Very clean, energetic vibe and the trainers are super motivating!"</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="comment-section">
+    <h3>Leave a Comment</h3>
+    <div class="comment-form">
+      <textarea placeholder="Share your thoughts..."></textarea>
+      <button>Submit Comment</button>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 Rapid Fitness Gym | Designed by Rao Jatin | Kund, Near Police Station, Rewari, Haryana</p>
+  </footer>
+
+  <script>
+    const menuIcon = document.querySelector('.menu-icon');
+    menuIcon.addEventListener('click', () => {
+      document.getElementById('sidebar').style.right = "0";
+      document.getElementById('overlay').style.display = "block";
+    });
+    function closeSidebar() {
+      document.getElementById('sidebar').style.right = "-250px";
+      document.getElementById('overlay').style.display = "none";
+    }
+  </script>
+</body>
+</html>
